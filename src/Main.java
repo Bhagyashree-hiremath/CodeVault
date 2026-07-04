@@ -97,14 +97,18 @@ public class Main {
                             newCompany);
 
                     break;
-
-
-
                 case 5:
 
-                    System.out.println("🚧 Delete feature will be added soon.");
+                    System.out.println("\n------ Delete Question ------");
+
+                    System.out.print("Enter Question Number (starting from 1): ");
+                    int deleteIndex = sc.nextInt();
+                    sc.nextLine();
+
+                    service.deleteQuestion(deleteIndex - 1);
 
                     break;
+
 
                 case 6:
 

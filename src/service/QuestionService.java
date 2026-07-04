@@ -68,4 +68,19 @@ public class QuestionService {
 
         System.out.println("✅ Question Updated Successfully!");
     }
+
+    // Delete a question
+    public void deleteQuestion(int index) {
+
+        if (index < 0 || index >= questions.size()) {
+            System.out.println("❌ Invalid Question Number!");
+            return;
+        }
+
+        Question deletedQuestion = questions.remove(index);
+
+        System.out.println("✅ Question Deleted Successfully!");
+        System.out.println("Deleted Question:");
+        System.out.println(deletedQuestion);
+    }
 }
