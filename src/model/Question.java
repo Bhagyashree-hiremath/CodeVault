@@ -26,8 +26,21 @@ public class Question {
         return difficulty;
     }
 
-    public String getCompany() {
-        return company;
+    public String getCompany() {return company;}
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     @Override
