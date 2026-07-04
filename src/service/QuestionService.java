@@ -1,7 +1,6 @@
 package service;
 
 import model.Question;
-
 import java.util.ArrayList;
 
 public class QuestionService {
@@ -49,5 +48,24 @@ public class QuestionService {
         if (!found) {
             System.out.println("No questions found for topic: " + topic);
         }
+    }
+
+    // Update question
+    public void updateQuestion(int index, String question, String topic,
+                               String difficulty, String company) {
+
+        if (index < 0 || index >= questions.size()) {
+            System.out.println("❌ Invalid Question Number!");
+            return;
+        }
+
+        Question q = questions.get(index);
+
+        q.setQuestion(question);
+        q.setTopic(topic);
+        q.setDifficulty(difficulty);
+        q.setCompany(company);
+
+        System.out.println("✅ Question Updated Successfully!");
     }
 }

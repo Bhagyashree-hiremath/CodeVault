@@ -70,12 +70,35 @@ public class Main {
                     service.searchByTopic(searchTopic);
 
                     break;
-
                 case 4:
 
-                    System.out.println("🚧 Update feature will be added soon.");
+                    System.out.println("\n------ Update Question ------");
+
+                    System.out.print("Enter Question Number (starting from 1): ");
+                    int index = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Enter New Question: ");
+                    String newQuestion = sc.nextLine();
+
+                    System.out.print("Enter New Topic: ");
+                    String newTopic = sc.nextLine();
+
+                    System.out.print("Enter New Difficulty: ");
+                    String newDifficulty = sc.nextLine();
+
+                    System.out.print("Enter New Company: ");
+                    String newCompany = sc.nextLine();
+
+                    service.updateQuestion(index - 1,
+                            newQuestion,
+                            newTopic,
+                            newDifficulty,
+                            newCompany);
 
                     break;
+
+
 
                 case 5:
 
