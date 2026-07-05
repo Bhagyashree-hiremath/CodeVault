@@ -49,7 +49,26 @@ public class QuestionService {
             System.out.println("No questions found for topic: " + topic);
         }
     }
+    public void searchByCompany(String company) {
 
+        boolean found = false;
+
+        System.out.println("\n========== COMPANY SEARCH ==========");
+
+        for (Question question : questions) {
+
+            if (question.getCompany().equalsIgnoreCase(company)) {
+
+                System.out.println(question);
+                System.out.println("----------------------------------");
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No questions found for company: " + company);
+        }
+    }
     // Update question
     public void updateQuestion(int index, String question, String topic,
                                String difficulty, String company) {
