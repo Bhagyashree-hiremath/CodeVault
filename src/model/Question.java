@@ -6,14 +6,17 @@ public class Question {
     private String topic;
     private String difficulty;
     private String company;
+    private boolean favorite;
 
     public Question(String question, String topic, String difficulty, String company) {
         this.question = question;
         this.topic = topic;
         this.difficulty = difficulty;
         this.company = company;
+        this.favorite = false;
     }
 
+    // Getters
     public String getQuestion() {
         return question;
     }
@@ -26,7 +29,15 @@ public class Question {
         return difficulty;
     }
 
-    public String getCompany() {return company;}
+    public String getCompany() {
+        return company;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    // Setters
     public void setQuestion(String question) {
         this.question = question;
     }
@@ -43,11 +54,19 @@ public class Question {
         this.company = company;
     }
 
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
     @Override
     public String toString() {
-        return "Question : " + question +
-               "\nTopic : " + topic +
-               "\nDifficulty : " + difficulty +
-               "\nCompany : " + company;
+
+        String star = favorite ? "⭐ " : "";
+
+        return star +
+                "Question : " + question +
+                "\nTopic : " + topic +
+                "\nDifficulty : " + difficulty +
+                "\nCompany : " + company;
     }
 }

@@ -2,6 +2,7 @@ package service;
 
 import model.Question;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class QuestionService {
 
@@ -102,4 +103,41 @@ public class QuestionService {
         System.out.println("Deleted Question:");
         System.out.println(deletedQuestion);
     }
+
+public void markAsFavorite(int index) {
+    if (index < 0 || index >= questions.size()) {
+        System.out.println("❌ Invalid Question Number!");
+        return;
+    }
+        Question q = questions.get(index);
+        q.setFavorite(true);
+        System.out.println("⭐ Question marked as favorite!");
+    }
+    // View all favorite questions
+    public void viewFavoriteQuestions() {
+
+        if (questions.isEmpty()) {
+            System.out.println("No questions available.");
+            return;
+        }
+
+        boolean found = false;
+
+        System.out.println("\n========== FAVORITE QUESTIONS ==========");
+
+        for (Question question : questions) {
+
+            if (question.isFavorite()) {
+
+                System.out.println(question);
+                System.out.println("----------------------------------");
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No favorite questions found.");
+        }
+    }
+
 }
