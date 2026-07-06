@@ -3,15 +3,27 @@ package service;
 import model.Question;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashSet;
+import java.util.HashMap;
+import storage.FileManager;
 
 public class QuestionService {
 
+
     // List to store all questions
     private ArrayList<Question> questions = new ArrayList<>();
+private FileManager fileManager = new FileManager();
+public QuestionService(){
+    questions = fileManager.loadQuestions();
+}
 
     // Add a new question
     public void addQuestion(Question question) {
+
         questions.add(question);
+
+        fileManager.saveQuestions(questions);
+
         System.out.println("✅ Question added successfully!");
     }
 
@@ -50,6 +62,7 @@ public class QuestionService {
             System.out.println("No questions found for topic: " + topic);
         }
     }
+
     public void searchByCompany(String company) {
 
         boolean found = false;
@@ -70,6 +83,7 @@ public class QuestionService {
             System.out.println("No questions found for company: " + company);
         }
     }
+
     // Update question
     public void updateQuestion(int index, String question, String topic,
                                String difficulty, String company) {
@@ -87,6 +101,7 @@ public class QuestionService {
         q.setCompany(company);
 
         System.out.println("✅ Question Updated Successfully!");
+        fileManager.saveQuestions(questions);
     }
 
     // Delete a question
@@ -102,17 +117,26 @@ public class QuestionService {
         System.out.println("✅ Question Deleted Successfully!");
         System.out.println("Deleted Question:");
         System.out.println(deletedQuestion);
+        questions.remove(index);
+        fileManager.saveQuestions(questions);
     }
+    public void markAsFavorite(int index) {
 
-public void markAsFavorite(int index) {
-    if (index < 0 || index >= questions.size()) {
-        System.out.println("❌ Invalid Question Number!");
-        return;
-    }
+        if (index < 0 || index >= questions.size()) {
+            System.out.println("❌ Invalid Question Number!");
+            return;
+        }
+
         Question q = questions.get(index);
         q.setFavorite(true);
+
+        // Save updated data to file
+        fileManager.saveQuestions(questions);
+
         System.out.println("⭐ Question marked as favorite!");
     }
+
+
     // View all favorite questions
     public void viewFavoriteQuestions() {
 
@@ -140,4 +164,76 @@ public void markAsFavorite(int index) {
         }
     }
 
+    public void showDashboard() {
+        System.out.println("\n==========================================");
+        System.out.println("        📊 CODEVAULT DASHBOARD");
+        System.out.println("==========================================");
+
+        System.out.println("📚 Total Questions : " + questions.size());
+        int favoriteCount = 0;
+
+        for (Question question : questions) {
+            if (question.isFavorite()) {
+                favoriteCount++;
+            }
+        }
+        System.out.println("⭐ Favorite Questions : " + favoriteCount);
+
+        HashSet<String> companies = new HashSet<>();
+
+        for (Question question : questions) {
+            companies.add(question.getCompany());
+        }
+
+        System.out.println("🏢 Companies Covered : " + companies.size());
+
+
+        int easyCount = 0;
+        int mediumCount = 0;
+        int hardCount = 0;
+
+        for (Question question : questions) {
+
+            String difficulty = question.getDifficulty();
+
+            if (difficulty.equalsIgnoreCase("Easy")) {
+                easyCount++;
+            } else if (difficulty.equalsIgnoreCase("Medium")) {
+                mediumCount++;
+            } else if (difficulty.equalsIgnoreCase("Hard")) {
+                hardCount++;
+            }
+        }
+
+        System.out.println("Easy   : " + easyCount);
+        System.out.println("Medium : " + mediumCount);
+        System.out.println("Hard   : " + hardCount);
+
+
+        HashMap<String, Integer> companyCount = new HashMap<>();
+
+        for (Question question : questions) {
+
+            String company = question.getCompany();
+
+            companyCount.put(company,
+                    companyCount.getOrDefault(company, 0) + 1);
+        }
+
+        String topCompany = "";
+        int maxCount = 0;
+
+        for (
+                String company : companyCount.keySet()) {
+
+            int count = companyCount.get(company);
+
+            if (count > maxCount) {
+                maxCount = count;
+                topCompany = company;
+            }
+        }
+        System.out.println("🏆 Top Company : " + topCompany + " (" + maxCount + " Questions)");
+
+    }
 }

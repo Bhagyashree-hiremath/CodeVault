@@ -1,0 +1,9 @@
+What is JVM?|Java|Easy|TCS|true
+Explain OOP?|Java|Medium|Infosys|false
+What is Polymorphism?|Java|Hard|Google|false
+What is HashMap?|Java|Medium|Wipro|false
+What is JDK?|Java|Easy|Infosys|false
+What is SQL?|Database|Hard|TCS|false
+What is Java?|Java|Easy|Wipro|false
+What is Sorting and Filtering|Java|Hard|Wipro|false
+What is ArrayList?|Java|Medium|Delloite|false

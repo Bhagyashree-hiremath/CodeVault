@@ -23,10 +23,11 @@ public class Main {
             System.out.println("3. Search by Topic");
             System.out.println("4. Search by Company");
             System.out.println("5. ⭐ Mark as Favorite");
-            System.out.println("5. ⭐ View Favorite Questions");
-            System.out.println("6. Update Question");
-            System.out.println("7. Delete Question");
-            System.out.println("8. Exit");
+            System.out.println("6. ⭐ View Favorite Questions");
+            System.out.println("7. Update Question");
+            System.out.println("8. Delete Question");
+            System.out.println("9 Dashboard ");
+            System.out.println("10. Exit");
             System.out.println("==========================================");
             System.out.print("Enter your choice: ");
 
@@ -83,6 +84,26 @@ public class Main {
                     break;
                 case 5:
 
+                    System.out.println("\n------ Mark as Favorite ------");
+
+                    System.out.print("Enter Question Number (starting from 1): ");
+                    int favIndex = sc.nextInt();
+                    sc.nextLine();
+
+
+                    service.markAsFavorite(favIndex - 1);
+
+
+                    break;
+                case 6:
+
+                    System.out.println("\n------ Favorite Questions ------");
+
+                    service.viewFavoriteQuestions();
+
+                    break;
+                case 7:
+
                     System.out.println("\n------ Update Question ------");
 
                     System.out.print("Enter Question Number (starting from 1): ");
@@ -101,21 +122,33 @@ public class Main {
                     System.out.print("Enter New Company: ");
                     String newCompany = sc.nextLine();
 
-                    service.updateQuestion(index - 1,
+                    service.updateQuestion(
+                            index - 1,
                             newQuestion,
                             newTopic,
                             newDifficulty,
-                            newCompany);
+                            newCompany
+                    );
 
                     break;
-                case 6:
+                case 8:
 
-                    System.out.println("\n------ Favorite Questions ------");
+                    System.out.println("\n------ Delete Question ------");
 
-                    service.viewFavoriteQuestions();
+                    System.out.print("Enter Question Number (starting from 1): ");
+                    int deleteIndex = sc.nextInt();
+                    sc.nextLine();
+
+                    service.deleteQuestion(deleteIndex - 1);
 
                     break;
-                case 7:
+                case 9:
+
+                    System.out.println("\n------ Dashboard ------");
+
+                    service.showDashboard();
+                    break;
+                case 10:
 
                     System.out.println("\n====================================");
                     System.out.println("Thank you for using CodeVault ❤️");
@@ -124,12 +157,11 @@ public class Main {
                     break;
 
                 default:
-
                     System.out.println("❌ Invalid choice. Please try again.");
             }
 
-        }
-        while (choice != 7);
+        } while (choice != 10);
+
 
         sc.close();
     }
