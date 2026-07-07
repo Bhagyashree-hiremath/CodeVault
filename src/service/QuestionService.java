@@ -82,6 +82,27 @@ public class QuestionService {
             System.out.println("❌ No questions found for company: " + company);
         }
     }
+    // Search questions by difficulty
+    public void searchByDifficulty(String difficulty) {
+
+        boolean found = false;
+
+        System.out.println("\n========== DIFFICULTY SEARCH ==========");
+
+        for (Question question : questions) {
+
+            if (question.getDifficulty().equalsIgnoreCase(difficulty)) {
+
+                System.out.println(question);
+                System.out.println("----------------------------------");
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("❌ No questions found with difficulty: " + difficulty);
+        }
+    }
 
     // Update Question
     public void updateQuestion(int id,
