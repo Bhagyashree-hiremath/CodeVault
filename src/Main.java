@@ -32,13 +32,10 @@ public class Main {
             System.out.println("==========================================");
 
             try {
-
                 System.out.print("Enter your choice: ");
                 choice = sc.nextInt();
                 sc.nextLine();
-
             } catch (InputMismatchException e) {
-
                 System.out.println("❌ Please enter a valid number.");
                 sc.nextLine();
                 continue;
@@ -91,6 +88,7 @@ public class Main {
                     service.searchByCompany(searchCompany);
 
                     break;
+
                 case 5:
 
                     System.out.print("Enter Question ID: ");
