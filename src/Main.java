@@ -23,12 +23,13 @@ public class Main {
             System.out.println("2. View Questions");
             System.out.println("3. Search by Topic");
             System.out.println("4. Search by Company");
-            System.out.println("5. Mark Question as Favorite");
-            System.out.println("6. View Favorite Questions");
-            System.out.println("7. Dashboard");
-            System.out.println("8. Update Question");
-            System.out.println("9. Delete Question");
-            System.out.println("10. Exit");
+            System.out.println("5. Search by Difficulty");
+            System.out.println("6. Mark Question as Favorite");
+            System.out.println("7. View Favorite Questions");
+            System.out.println("8. Dashboard");
+            System.out.println("9. Update Question");
+            System.out.println("10. Delete Question");
+            System.out.println("11. Exit");
             System.out.println("==========================================");
 
             try {
@@ -88,8 +89,16 @@ public class Main {
                     service.searchByCompany(searchCompany);
 
                     break;
-
                 case 5:
+
+                    System.out.print("Enter Difficulty (Easy/Medium/Hard): ");
+                    String searchDifficulty = sc.nextLine();
+
+                    service.searchByDifficulty(searchDifficulty);
+
+                    break;
+
+                case 6:
 
                     System.out.print("Enter Question ID: ");
                     int favoriteId = sc.nextInt();
@@ -99,19 +108,19 @@ public class Main {
 
                     break;
 
-                case 6:
+                case 7:
 
                     service.viewFavoriteQuestions();
 
                     break;
 
-                case 7:
+                case 8:
 
                     service.showDashboard();
 
                     break;
 
-                case 8:
+                case 9:
 
                     System.out.print("Enter Question ID: ");
                     int updateId = sc.nextInt();
@@ -139,7 +148,7 @@ public class Main {
 
                     break;
 
-                case 9:
+                case 10:
 
                     System.out.print("Enter Question ID: ");
                     int deleteId = sc.nextInt();
@@ -149,7 +158,7 @@ public class Main {
 
                     break;
 
-                case 10:
+                case 11:
 
                     System.out.println("\n====================================");
                     System.out.println("Thank you for using CodeVault ❤️");
@@ -162,7 +171,7 @@ public class Main {
                     System.out.println("❌ Invalid Choice!");
             }
 
-        } while (choice != 10);
+        } while (choice != 11);
 
         sc.close();
     }

@@ -9,3 +9,5 @@ What is Sorting and Filtering|Java|Hard|Wipro|false
 What is ArrayList?|Java|Medium|Delloite|false
 What is looping statement|Java|Medium|Tcs|false
 What is Swings?|Advance Java|Easy|Microsoft|false
+What is Binary search|Java|Medium|Microsoft|false
+What is JVM?|Java|Easy|TCS|false
