@@ -6,13 +6,14 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class FileManager {
+    private static final String FILE_NAME = "questions.txt";
 
     // Save all questions to file
     public void saveQuestions(ArrayList<Question> questions) {
 
         try {
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter("questions.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME));
 
             for (Question question : questions) {
 
@@ -37,6 +38,7 @@ public class FileManager {
         }
     }
 
+
     // Load all questions from file
     public ArrayList<Question> loadQuestions() {
 
@@ -44,7 +46,7 @@ public class FileManager {
 
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader("questions.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
 
             String line;
 
