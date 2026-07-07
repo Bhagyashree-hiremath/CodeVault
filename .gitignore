@@ -2,3 +2,9 @@
 .vscode/
 bin/
 out/
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Runtime data
+questions.txt
