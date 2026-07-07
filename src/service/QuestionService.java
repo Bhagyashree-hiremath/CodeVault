@@ -6,14 +6,14 @@ import java.util.Scanner;
 import java.util.HashSet;
 import java.util.HashMap;
 import storage.FileManager;
-
+import java.util.Map;
 public class QuestionService {
 
 
     // List to store all questions
+    private FileManager fileManager = new FileManager();
     private ArrayList<Question> questions = new ArrayList<>();
-private FileManager fileManager = new FileManager();
-public QuestionService(){
+    public QuestionService(){
     questions = fileManager.loadQuestions();
 }
 
@@ -192,9 +192,9 @@ public QuestionService(){
         int mediumCount = 0;
         int hardCount = 0;
 
-        for (Question question : questions) {
+        for (Question q : questions) {
 
-            String difficulty = question.getDifficulty();
+            String difficulty = q.getDifficulty();
 
             if (difficulty.equalsIgnoreCase("Easy")) {
                 easyCount++;
@@ -203,6 +203,28 @@ public QuestionService(){
             } else if (difficulty.equalsIgnoreCase("Hard")) {
                 hardCount++;
             }
+        
+            // Top Company
+            HashMap<String, Integer> companyCount = new HashMap<>();
+
+            for (Question question : questions) {
+                String company = question.getCompany();
+                companyCount.put(company, companyCount.getOrDefault(company, 0) + 1);
+            }
+
+            String topCompany = "";
+            int maxCount = 0;
+
+            for (Map.Entry<String, Integer> entry : companyCount.entrySet()) {
+
+                if (entry.getValue() > maxCount) {
+                    maxCount = entry.getValue();
+                    topCompany = entry.getKey();
+                }
+            }
+
+            System.out.println("🏆 Top Company : " + topCompany +
+                    " (" + maxCount + " Questions)");
         }
 
         System.out.println("Easy   : " + easyCount);
