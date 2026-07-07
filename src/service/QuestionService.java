@@ -71,47 +71,64 @@ public class QuestionService {
         }
     }
     // Update question
-    public void updateQuestion(int index, String question, String topic,
-                               String difficulty, String company) {
+    public void updateQuestion(int id,
+                               String question,
+                               String topic,
+                               String difficulty,
+                               String company) {
 
-        if (index < 0 || index >= questions.size()) {
-            System.out.println("❌ Invalid Question Number!");
-            return;
+        for (Question q : questions) {
+
+            if (q.getId() == id) {
+
+                q.setQuestion(question);
+                q.setTopic(topic);
+                q.setDifficulty(difficulty);
+                q.setCompany(company);
+
+                System.out.println("✅ Question updated successfully!");
+
+                return;
+            }
         }
 
-        Question q = questions.get(index);
-
-        q.setQuestion(question);
-        q.setTopic(topic);
-        q.setDifficulty(difficulty);
-        q.setCompany(company);
-
-        System.out.println("✅ Question Updated Successfully!");
+        System.out.println("❌ Question ID not found!");
     }
 
     // Delete a question
-    public void deleteQuestion(int index) {
+    public void deleteQuestion(int id) {
 
-        if (index < 0 || index >= questions.size()) {
-            System.out.println("❌ Invalid Question Number!");
-            return;
+        for (Question question : questions) {
+
+            if (question.getId() == id) {
+
+                questions.remove(question);
+
+                System.out.println("✅ Question deleted successfully!");
+
+                return;
+            }
         }
 
-        Question deletedQuestion = questions.remove(index);
-
-        System.out.println("✅ Question Deleted Successfully!");
-        System.out.println("Deleted Question:");
-        System.out.println(deletedQuestion);
+        System.out.println("❌ Question ID not found!");
     }
 
-public void markAsFavorite(int index) {
-    if (index < 0 || index >= questions.size()) {
-        System.out.println("❌ Invalid Question Number!");
-        return;
-    }
-        Question q = questions.get(index);
-        q.setFavorite(true);
-        System.out.println("⭐ Question marked as favorite!");
+    public void markAsFavorite(int id) {
+
+        for (Question question : questions) {
+
+            if (question.getId() == id) {
+
+                question.setFavorite(true);
+
+                System.out.println("⭐ Question marked as favorite!");
+
+                return;
+            }
+        }
+
+        System.out.println("❌ Question ID not found!");
+
     }
     // View all favorite questions
     public void viewFavoriteQuestions() {
@@ -138,6 +155,22 @@ public void markAsFavorite(int index) {
         if (!found) {
             System.out.println("No favorite questions found.");
         }
+    }
+    public void showDashboard() {
+
+        System.out.println("\n========== CODEVAULT DASHBOARD ==========");
+
+        System.out.println("📚 Total Questions : " + questions.size());
+
+        int favoriteCount = 0;
+
+        for (Question question : questions) {
+            if (question.isFavorite()) {
+                favoriteCount++;
+            }
+        }
+
+        System.out.println("⭐ Favorite Questions : " + favoriteCount);
     }
 
 }

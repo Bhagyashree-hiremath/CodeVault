@@ -1,6 +1,7 @@
 import model.Question;
 import service.QuestionService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -10,7 +11,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         QuestionService service = new QuestionService();
 
-        int choice;
+        int choice = 0;
 
         do {
 
@@ -22,16 +23,26 @@ public class Main {
             System.out.println("2. View Questions");
             System.out.println("3. Search by Topic");
             System.out.println("4. Search by Company");
-            System.out.println("5. ⭐ Mark as Favorite");
-            System.out.println("5. ⭐ View Favorite Questions");
-            System.out.println("6. Update Question");
-            System.out.println("7. Delete Question");
-            System.out.println("8. Exit");
+            System.out.println("5. Mark Question as Favorite");
+            System.out.println("6. View Favorite Questions");
+            System.out.println("7. Dashboard");
+            System.out.println("8. Update Question");
+            System.out.println("9. Delete Question");
+            System.out.println("10. Exit");
             System.out.println("==========================================");
-            System.out.print("Enter your choice: ");
 
-            choice = sc.nextInt();
-            sc.nextLine(); // Consume newline
+            try {
+
+                System.out.print("Enter your choice: ");
+                choice = sc.nextInt();
+                sc.nextLine();
+
+            } catch (InputMismatchException e) {
+
+                System.out.println("❌ Please enter a valid number.");
+                sc.nextLine();
+                continue;
+            }
 
             switch (choice) {
 
@@ -59,23 +70,22 @@ public class Main {
 
                 case 2:
 
-                    System.out.println("\n------ All Questions ------");
-
                     service.viewQuestions();
 
                     break;
 
                 case 3:
 
-                    System.out.print("Enter Topic to Search: ");
+                    System.out.print("Enter Topic: ");
                     String searchTopic = sc.nextLine();
 
                     service.searchByTopic(searchTopic);
 
                     break;
+
                 case 4:
 
-                    System.out.print("Enter Company to Search: ");
+                    System.out.print("Enter Company: ");
                     String searchCompany = sc.nextLine();
 
                     service.searchByCompany(searchCompany);
@@ -83,10 +93,30 @@ public class Main {
                     break;
                 case 5:
 
-                    System.out.println("\n------ Update Question ------");
+                    System.out.print("Enter Question ID: ");
+                    int favoriteId = sc.nextInt();
+                    sc.nextLine();
 
-                    System.out.print("Enter Question Number (starting from 1): ");
-                    int index = sc.nextInt();
+                    service.markAsFavorite(favoriteId);
+
+                    break;
+
+                case 6:
+
+                    service.viewFavoriteQuestions();
+
+                    break;
+
+                case 7:
+
+                    service.showDashboard();
+
+                    break;
+
+                case 8:
+
+                    System.out.print("Enter Question ID: ");
+                    int updateId = sc.nextInt();
                     sc.nextLine();
 
                     System.out.print("Enter New Question: ");
@@ -101,21 +131,27 @@ public class Main {
                     System.out.print("Enter New Company: ");
                     String newCompany = sc.nextLine();
 
-                    service.updateQuestion(index - 1,
+                    service.updateQuestion(
+                            updateId,
                             newQuestion,
                             newTopic,
                             newDifficulty,
-                            newCompany);
+                            newCompany
+                    );
 
                     break;
-                case 6:
 
-                    System.out.println("\n------ Favorite Questions ------");
+                case 9:
 
-                    service.viewFavoriteQuestions();
+                    System.out.print("Enter Question ID: ");
+                    int deleteId = sc.nextInt();
+                    sc.nextLine();
+
+                    service.deleteQuestion(deleteId);
 
                     break;
-                case 7:
+
+                case 10:
 
                     System.out.println("\n====================================");
                     System.out.println("Thank you for using CodeVault ❤️");
@@ -125,11 +161,10 @@ public class Main {
 
                 default:
 
-                    System.out.println("❌ Invalid choice. Please try again.");
+                    System.out.println("❌ Invalid Choice!");
             }
 
-        }
-        while (choice != 7);
+        } while (choice != 10);
 
         sc.close();
     }
