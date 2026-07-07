@@ -1,7 +1,8 @@
 package model;
 
 public class Question {
-
+    private static int nextId = 101;
+    private int id;
     private String question;
     private String topic;
     private String difficulty;
@@ -9,6 +10,8 @@ public class Question {
     private boolean favorite;
 
     public Question(String question, String topic, String difficulty, String company) {
+        this.id = nextId++;
+
         this.question = question;
         this.topic = topic;
         this.difficulty = difficulty;
@@ -17,6 +20,10 @@ public class Question {
     }
 
     // Getters
+    public int getId() {
+        return id;
+    }
+
     public String getQuestion() {
         return question;
     }
@@ -36,6 +43,7 @@ public class Question {
     public boolean isFavorite() {
         return favorite;
     }
+
 
     // Setters
     public void setQuestion(String question) {
@@ -57,16 +65,13 @@ public class Question {
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
     }
-
     @Override
     public String toString() {
-
-        String star = favorite ? "⭐ " : "";
-
-        return star +
-                "Question : " + question +
+        return "ID : " + id +
+                "\nQuestion : " + question +
                 "\nTopic : " + topic +
                 "\nDifficulty : " + difficulty +
-                "\nCompany : " + company;
+                "\nCompany : " + company +
+                "\nFavorite : " + favorite;
     }
 }
