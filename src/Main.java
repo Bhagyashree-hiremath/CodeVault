@@ -29,7 +29,9 @@ public class Main {
             System.out.println("8. Dashboard");
             System.out.println("9. Update Question");
             System.out.println("10. Delete Question");
-            System.out.println("11. Exit");
+            System.out.println("11. Practice Random Question");
+            System.out.println("12. Topic Statistics");
+            System.out.println("13. Exit");
             System.out.println("==========================================");
 
             try {
@@ -46,8 +48,6 @@ public class Main {
 
                 case 1:
 
-                    System.out.println("\n------ Add New Question ------");
-
                     System.out.print("Enter Question: ");
                     String question = sc.nextLine();
 
@@ -60,64 +60,41 @@ public class Main {
                     System.out.print("Enter Company: ");
                     String company = sc.nextLine();
 
-                    Question q = new Question(question, topic, difficulty, company);
-
-                    service.addQuestion(q);
-
+                    service.addQuestion(new model.Question(question, topic, difficulty, company));
                     break;
 
                 case 2:
-
                     service.viewQuestions();
-
                     break;
 
                 case 3:
-
                     System.out.print("Enter Topic: ");
-                    String searchTopic = sc.nextLine();
-
-                    service.searchByTopic(searchTopic);
-
+                    service.searchByTopic(sc.nextLine());
                     break;
 
                 case 4:
-
                     System.out.print("Enter Company: ");
-                    String searchCompany = sc.nextLine();
-
-                    service.searchByCompany(searchCompany);
-
+                    service.searchByCompany(sc.nextLine());
                     break;
+
                 case 5:
-
-                    System.out.print("Enter Difficulty (Easy/Medium/Hard): ");
-                    String searchDifficulty = sc.nextLine();
-
-                    service.searchByDifficulty(searchDifficulty);
-
+                    System.out.print("Enter Difficulty: ");
+                    service.searchByDifficulty(sc.nextLine());
                     break;
 
                 case 6:
-
                     System.out.print("Enter Question ID: ");
-                    int favoriteId = sc.nextInt();
+                    int favId = sc.nextInt();
                     sc.nextLine();
-
-                    service.markAsFavorite(favoriteId);
-
+                    service.markAsFavorite(favId);
                     break;
 
                 case 7:
-
                     service.viewFavoriteQuestions();
-
                     break;
 
                 case 8:
-
                     service.showDashboard();
-
                     break;
 
                 case 9:
@@ -145,33 +122,34 @@ public class Main {
                             newDifficulty,
                             newCompany
                     );
-
                     break;
 
                 case 10:
-
                     System.out.print("Enter Question ID: ");
                     int deleteId = sc.nextInt();
                     sc.nextLine();
-
                     service.deleteQuestion(deleteId);
-
                     break;
 
                 case 11:
+                    service.practiceRandomQuestion();
+                    break;
 
+                case 12:
+                    service.showTopicStatistics();
+                    break;
+
+                case 13:
                     System.out.println("\n====================================");
                     System.out.println("Thank you for using CodeVault ❤️");
                     System.out.println("====================================");
-
                     break;
 
                 default:
-
                     System.out.println("❌ Invalid Choice!");
             }
 
-        } while (choice != 11);
+        } while (choice != 13);
 
         sc.close();
     }

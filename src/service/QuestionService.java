@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 
 public class QuestionService {
 
@@ -277,5 +278,64 @@ public class QuestionService {
                 " (" + maxCount + " Questions)");
 
         System.out.println("==========================================");
+    }
+    // Show Topic Statistics
+    public void showTopicStatistics() {
+
+        if (questions.isEmpty()) {
+            System.out.println("❌ No questions available.");
+            return;
+        }
+
+        HashMap<String, Integer> topicCount = new HashMap<>();
+
+        // Count questions for each topic
+        for (Question question : questions) {
+
+            String topic = question.getTopic();
+
+            topicCount.put(
+                    topic,
+                    topicCount.getOrDefault(topic, 0) + 1
+            );
+        }
+
+        System.out.println("\n========== TOPIC STATISTICS ==========");
+
+        // Display topic counts
+        for (Map.Entry<String, Integer> entry : topicCount.entrySet()) {
+
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+
+        // Find the most studied topic
+        String topTopic = "";
+        int maxCount = 0;
+
+        for (Map.Entry<String, Integer> entry : topicCount.entrySet()) {
+
+            if (entry.getValue() > maxCount) {
+
+                maxCount = entry.getValue();
+                topTopic = entry.getKey();
+            }
+        }
+
+        System.out.println("----------------------------------");
+        System.out.println("📚 Most Studied Topic : " + topTopic +
+                " (" + maxCount + " Questions)");
+    }
+    public void practiceRandomQuestion() {
+        if (questions.isEmpty()) {
+            System.out.println("No questions available.");
+            return;
+        }
+
+        Random random = new Random();
+        int randomIndex = random.nextInt(questions.size());
+        Question randomQuestion = questions.get(randomIndex);
+
+        System.out.println("\n===== RANDOM QUESTION =====");
+        System.out.println(randomQuestion);
     }
 }
