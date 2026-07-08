@@ -3,36 +3,56 @@ import service.QuestionService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+import auth.Login;
+import ui.SplashScreen;
 public class Main {
 
     public static void main(String[] args) {
+        SplashScreen splash = new SplashScreen();
+        splash.show();
 
+        Login login = new Login();
+
+        if (!login.login()) {
+            return;
+        }
         Scanner sc = new Scanner(System.in);
         QuestionService service = new QuestionService();
 
         int choice = 0;
 
         do {
-
-            System.out.println("\n==========================================");
-            System.out.println("           📚 CODEVAULT");
-            System.out.println(" Interview Question Management System");
-            System.out.println("==========================================");
-            System.out.println("1. Add Question");
-            System.out.println("2. View Questions");
-            System.out.println("3. Search by Topic");
-            System.out.println("4. Search by Company");
-            System.out.println("5. Search by Difficulty");
-            System.out.println("6. Mark Question as Favorite");
-            System.out.println("7. View Favorite Questions");
-            System.out.println("8. Dashboard");
-            System.out.println("9. Update Question");
-            System.out.println("10. Delete Question");
-            System.out.println("11. Practice Random Question");
-            System.out.println("12. Topic Statistics");
-            System.out.println("13. Exit");
-            System.out.println("==========================================");
+            System.out.println("\n==================================================");
+            System.out.println("              📚 CODEVAULT v1.0");
+            System.out.println("      Interview Question Management System");
+            System.out.println("==================================================");
+            System.out.println("👤 Logged in as: Admin");
+            System.out.println("==================================================");
+            System.out.println("\n╔════════════════════════════════════════════════════╗");
+            System.out.println("║                 CODEVAULT v1.0                    ║");
+            System.out.println("║      Interview Question Management System        ║");
+            System.out.println("╠════════════════════════════════════════════════════╣");
+            System.out.println("║  1. Add Question                                 ║");
+            System.out.println("║  2. View Questions                               ║");
+            System.out.println("║  3. Search by Topic                              ║");
+            System.out.println("║  4. Search by Company                            ║");
+            System.out.println("║  5. Search by Difficulty                         ║");
+            System.out.println("║  6. Mark Question as Favorite                    ║");
+            System.out.println("║  7. View Favorite Questions                      ║");
+            System.out.println("║  8. Dashboard                                    ║");
+            System.out.println("║  9. Update Question                              ║");
+            System.out.println("║ 10. Delete Question                              ║");
+            System.out.println("║ 11. Practice Random Question                     ║");
+            System.out.println("║ 12. Topic Statistics                             ║");
+            System.out.println("║ 13. Sort Questions                               ║");
+            System.out.println("║ 14. Search by Keyword                            ║");
+            System.out.println("║ 15. Export Questions                             ║");
+            System.out.println("║ 16. Progress Tracker                             ║");
+            System.out.println("║ 17. Quiz Mode                                    ║");
+            System.out.println("║ 18. About CodeVault                              ║");
+            System.out.println("║ 19. Help                                         ║");
+            System.out.println("║ 20. Exit                                         ║");
+            System.out.println("╚══════════════════════════════════════════════════╝");
 
             try {
                 System.out.print("Enter your choice: ");
@@ -138,18 +158,45 @@ public class Main {
                 case 12:
                     service.showTopicStatistics();
                     break;
-
                 case 13:
-                    System.out.println("\n====================================");
-                    System.out.println("Thank you for using CodeVault ❤️");
-                    System.out.println("====================================");
+                    service.sortQuestions();
+                    break;
+                case 14:
+                    service.searchByKeyword();
+                    break;
+                case 15:
+                    service.exportQuestions();
+                    break;
+                case 16:
+                    service.showProgressTracker();
+                    break;
+                case 17:
+                    service.quizMode();
+                    break;
+                case 18:
+                    service.aboutCodeVault();
+                    break;
+                case 19:
+                    service.helpMenu();
+                    break;
+                    case 20:
+                    System.out.println("\n==================================================");
+                    System.out.println("          Thank You for Using CODEVAULT ❤️");
+                    System.out.println("--------------------------------------------------");
+                    System.out.println("      Developed by : Bhagyashree Computer Science Engineering Student");
+                    System.out.println("      Version      : 1.0");
+
+                    System.out.println("   Keep Learning. Keep Growing. 🚀");
+                    System.out.println("   All the Best for Your Placements!");
+                    System.out.println("==================================================");
+                    System.exit(0);
                     break;
 
                 default:
                     System.out.println("❌ Invalid Choice!");
             }
 
-        } while (choice != 13);
+        } while (choice != 20);
 
         sc.close();
     }

@@ -1,1 +1,4 @@
 What is JVM?|Java|Easy|TCS|false
+What is AVL Tree?|DSA|Medium|Google|true
+What is Binary Tree?|DSA|Hard|TCS|false
+How Java is Excute|java|Medium|Wipro|false
